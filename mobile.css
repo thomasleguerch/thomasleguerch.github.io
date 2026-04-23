@@ -18,4 +18,8 @@
 			color: #777
 	;
 		}
+	header,
+	footer {
+		height: 10%;
+	}
 }
