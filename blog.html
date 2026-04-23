@@ -4,21 +4,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile.css"></link>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>
     window.MathJax = {
       options: {
-        enableMenu: false
+        enableMenu: false,
+        enableExplorer: false
       },
       tex: {
+        packages: {'[+]': ['mathrsfs']},
         displayMath: [['$$', '$$'], ['\\[', '\\]' ]],
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
         tags: 'ams',
         macros: {
-          dd: "\\mathrm d"
+          dd: "\\mathrm d",
+          mathcal: ["{\\mathscr{#1}}", 1]
         }
       }
     };
   </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
   <script src="script.js"></script>
     <title>Personal webpage of Thomas Le Guerch</title>
     <meta charset="utf-8"/>
@@ -36,47 +40,61 @@
       SDEs may be used to make sense of ODEs with noise only when the integral of the noise is a semimartingale (the sum of a finite variation process and a martingale).
       </i>
     </p>
-    <h4>A pseudo-history of SDEs</h4>
+    <h4>The mythology of stochastic calculus</h4>
     <p>
       A pedagogical shortcut often taken to introduce stochastic differential equations is to present them as a natural extension of ordinary differential equations (ODE), see for instance \cite{Evans,legall}, p. 209. The ODE
-      \[\dot{y}_t=b(y_t)\]
+      \[\dot{x}_t=b(x_t)\]
       can be upgraded to the following &laquo; ODE with noise &raquo;
-      \[\dot{y}_t=b(y_t)+\sigma\xi_t\,,\]
-      where \(\sigma\in\mathbb R\) and \(\xi\) is some random forcing. The strength parameter \(\sigma\) can be further chosen to depend on \(y_t\):
+      \[\dot{X}_t=b(X_t)+\sigma\xi_t\,,\]
+      where \(\sigma\in\mathbb R\) and \(\xi\) is some random forcing. By random forcing, one could think of an irregular function, but we mean a stochastic process.
+      This means that for every $t$, $\xi_t$ is a random variable which depends on a chance parameter $\omega$.
+      Notice that $x$ became $X$, to emphasize that $X$ depends on $\omega$.
+      The strength parameter \(\sigma\) can be further chosen to depend on \(X_t\):
       \begin{equation}\label{eq:ODE_with_noise}
-        \dot{y}_t=b(y_t)+\sigma(y_t)\xi_t\,.
+        \dot{X}_t=b(X_t)+\sigma(X_t)\xi_t\,.
       \end{equation}
     </p>
     <p>
+      Equation \eqref{eq:ODE_with_noise} can be loosely described as a controlled differential equation with random control.
       In the context of physical or financial modelling, the random forcing \(\xi\) stems from <i>unknown</i> degrees of freedom,
-      and it is quite natural to take \(\xi\) to be a white noise (centred impulses occurring randomly and equally at every frequency).
+      and it is quite natural to take \(\xi\) to be a Gaussian white noise (centred Gaussian impulses occurring randomly and equally at every frequency).
       In this context, typical realisations of \(\xi\) are generalised functions <a href="#footnote0">[0]</a>, and \eqref{eq:ODE_with_noise} involves the product of a generalised function with a non-smooth function, which is an ill-defined operation.
-      Equation \eqref{eq:ODE_with_noise} classically makes sense for smooth enough signals (the time integral of \(\xi\) should be Lipschitz or BV), but white noise is not smooth enough.
-      This means that it is impossible to make sense of \eqref{eq:ODE_with_noise} for typical realisations of \(\xi\).
+      Equations of the type
+      \begin{equation}\label{eq:ODE_controlled}
+      \dot x_t=b(x_t)+\sigma(x_t)\dot g_t 
+      \end{equation}
+      classically make sense for smooth enough controls ($g$ should be Lipschitz or BV), but white noise is not smooth enough.
+      This means that it is impossible to make sense of \eqref{eq:ODE_with_noise} for typical realisations of Gaussian white noise.
     </p>
     <p>
-      Making sense of \eqref{eq:ODE_with_noise} when \(\xi\) is truly a white noise is still possible, provided we interpret the equation in a weaker sense.
+      Making sense of \eqref{eq:ODE_with_noise} when \(\xi\) is truly Gaussian white noise is still possible, provided we interpret the equation in a weaker sense.
       Notice that, even though typical realisations of \(\xi\) are generalised functions, they are the derivative of a true function. In other words, there exists a random process \(B\) (whose typical realisations are true functions)
       such that, in the sense of generalised functions,
       \begin{equation*}
           \frac{\dd B}{\dd t}=\xi\,.
       \end{equation*}
-      Trading \(\xi\) for \(B\), is is tempting to rewrite formally \eqref{eq:ODE_with_noise} as
-      \begin{equation}\label{eq:proto_SDE}
-          \dd y_t=b(y_t)\,\dd t+\sigma(y_t)\,\dd B_t\,,
-      \end{equation}
-      or in integral form (still formally)
+      It is tempting to rewrite formally \eqref{eq:ODE_controlled} in integral form
       \begin{equation}\label{eq:proto_SDE_integral}
-          y_t=y_0+\int_0^tb(y_s)\,\dd s+\int_0^t\sigma(y_s)\,\dd B_s\,.
+          x_t=x_0+\int_0^tb(x_s)\,\dd s+\int_0^t\sigma(x_s)\,\dd g_s\,.
       \end{equation}
-      Usually, in stochastic analysis textbooks, the author remarks that \eqref{eq:proto_SDE_integral} can magically be made sense of with the brand new <i>stochastic integral</i> they defined in the previous chapters.
-      At this point, they keep quiet about the fact that this approach requires \(B\) to satisfy rather strong probabilistic properties. In the context of physical or financial modelling, these properties are rarely satisfied.
-      So what is it they're so happy about? Something is clearly off.
+      Equation \eqref{eq:proto_SDE_integral} is as problematic as \eqref{eq:ODE_with_noise} from an analytical point of view.
+      This time, the issue is not about multiplying a distribution with a non-smooth function, it is about integrating a function with respect to another one 
+      without any guarantee on their regularity. Indeed, to make sense of the integral with respect to $g$, one could expect to rely on Stieltjes integrals,
+      but one would need $g$ to be Lipschitz or BV. This analytical problem is equivalent to multiplying a distribution with a non-smooth function.
+    </p>
+    <p>
+      And yet, in stochastic analysis textbooks, the author always pulls <i>Itô integrals</i> out of the hat.
+      At this point, they keep quiet about the fact that this approach required $\xi$ to be Gaussian white noise. In the context of physical or financial modelling, many other types of random inputs would make perfect sense,
+      but it is impossible to model them using Itô integrals.
+      Yet, countless books offer an introduction to Itô calculus without explicitly referring to this significant limitation.
+    </p>
+    <p>
+        In most contexts, Itô calculus and stochastic calculus are used interchangeably, but Itô calculus has a very narrow scope.
     </p>
     <p>
       We will rely on \cite{IW,KS,RY} and the seminal work \cite{Ito} <a href="#footnote1">[1]</a> to recount a more accurate history.
       The advent of SDEs is to be found in the theory of Markov processes rather than in the theory of ODEs.
-      My point is not to criticise authors who choose this approach to introduce SDEs. Their aim is to motivate the introduction of a material which has far exceeded its historical purpose.
+      My point is not to criticise authors who choose the latter approach to introduce SDEs. Their aim is to motivate the introduction of a material which has far exceeded its historical purpose.
     </p>
     <h4>A more accurate history of SDEs</h4>
     <p>
@@ -106,23 +124,53 @@
         X_t=x+\int_0^tb(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd W_s\,.
     \end{equation}
 
-    If one came up with a way of defining the second integral appearing in \eqref{eq:SDE}, then one could construct \(X\) as the solution to \eqref{eq:SDE}.
+    Notice how \eqref{eq:SDE} resembles \eqref{eq:proto_SDE_integral}, even tough we obtained them in unrelated ways.
+    The analytical problem we already mentioned still persists, but this time $W$ is naturally a Brownian motion.
+    Apparently, this is how SDEs first appeared historically. People noticed that if one came up with a way of defining the second integral appearing in \eqref{eq:SDE}, then one could construct \(X\) as the solution to \eqref{eq:SDE}.
     According to \cite{IW,KS}, this approach to diffusions was proposed by P. Lévy and is dubbed in \cite{KS} as the <i>methodology of stochastic differential equations</i> <a href="#footnote2">[2]</a>.
     The merit of defining the <i>stochastic integral</i> with respect to \(W\) rests on Itô and is presented in \cite{Ito}.
     </p>
-    <h4>Analytical trouble and the \(p\)-variation</h4>
+    <h4>Analytical trouble, Young integrals and the \(p\)-variation</h4>
     <p>
-      A fact which is often disregarded in courses on stochastic analysis <a href="#footnote3">[3]</a> is that quadratic variation is different from the more usual \(2\)-variation from real analysis.<br>
-      <b>Definition</b> <i>We define the \(p\)-variation on the interval \(I\subset[0,\infty)\) of any function \(f:[0,\infty)\rightarrow\mathbb R\) as the quantity
+        Bearing in mind that we wish to make sense of integrals of the type
+        $$
+        \int_0^tf_s\,\dd g_s\,,
+        $$
+        we naturally wish to examine the convergence of Riemann-type sums
+        \begin{equation}\label{eq:riemann_sums}
+            \sum_i f_{t_i}(g_{t_{i+1}}-g_{t_i})
+        \end{equation}
+        when the mesh of the partition goes to $0$. Let us introduce $p$-variation, which is of particular interest when it comes to giving criteria for the convergence of Riemann sums. <br>
+        <b>Definition</b> <i>We define the \(p\)-variation on the interval \(I\subset[0,\infty)\) of any function \(f:[0,\infty)\rightarrow\mathbb R\) as the quantity
           \begin{equation*}
-              \|f\|_{p-\text{var}}^I:=\sup_{D(I)}\left(\sum_{t_k\in D(I)}(f(t_{k+1})-f(t_k))^p\right)^{1/p}\,,
+              \|f\|_{p-\text{var}}^I:=\sup_{D(I)}\left(\sum_{k}(f(t_{k+1})-f(t_k))^p\right)^{1/p}\,,
           \end{equation*}
-      where the supremum runs over all subdivisions of \(I\).</i><br>
-      <b>Theorem</b> <i>For every \(p\le2\), for every \(I\subset[0,\infty)\), \(\|B\|_{p-\text{var}}^I=\infty\) a.s. In particular, a.s., \(B\) has infinite 2-variation over all intervals.
-      The same result holds for any continuous semimartingale.</i><br>
-      Quite often, courses on stochastic analysis insist that \(B\) has infinite variation (infinite \(1\)-variation) over all intervals, ruling out the possibility to use Stieltjes integrals to make sense of SDEs.
-      Much more crucially, the previous theorem rules out Young-Kondurar integrals <a href="#footnote4">[4]</a> altogether to make sense of SDEs.
-      This is related to the issue of multiplying two distributions.
+        where the supremum runs over all subdivisions of \(I\).</i><br>
+        <b>Remark</b> <i>A fact which is rarely mentioned, but is central in Terry Lyons' work, is that quadratic variation is different from \(2\)-variation.<br></i>
+        Here is the general criterion for the convergence Riemann-sums under $p$-variation hypotheses:<br>
+        <b>Theorem</b> <i>If $\|f\|_{p-\text{var}}^{[0,t]}&lt\infty$ and $\|g\|_{q-\text{var}}^{[0,t]}&lt\infty$ with $p^{-1}+q^{-1}>1$, then the Riemann-sums converge
+            along any sequence of subvisions of $[0,t]$ with vanishing mesh, to the same limit.
+            We call this limit the Young-Kondurar integral of $f$ w.r.t. $g$.
+        </i><br> 
+
+        The previous theorem is pretty significant, because the solution $x$ to \eqref{eq:proto_SDE_integral} is known to inherit its regularity from that of $g$.
+        This means that $q=p$, and even assuming $\sigma$ to be smooth, the criterion requires $p&lt2$. At this point, there is still hope that Young integrals are enoug to make sense of
+        \eqref{eq:SDE}, but unfortunately:<br>
+        <b>Theorem</b> <i>For every \(p\le2\), for every interval \(I\subset[0,\infty)\), \(\|B\|_{p-\text{var}}^I=\infty\) a.s. In particular, a.s., \(B\) has infinite 2-variation over all intervals.
+        The same result holds for any continuous semimartingale.</i><br>
+        Quite often, courses on stochastic analysis insist that \(B\) has infinite variation (infinite \(1\)-variation) over all intervals, ruling out the possibility to use Stieltjes integrals to make sense of \eqref{eq:SDE}.
+        Much more crucially, the previous theorem rules out Young-Kondurar integrals altogether.
+    </p>
+    <p>
+        One might expect that $p$-variation is not the final answer, but here comes the final nail in the coffin. <br>
+        <b>Theorem</b> (Lyons 91) <i>There exists no separable Banach space $\mathcal B\subset\mathcal C([0,1])$ with the following properties
+            <ul>
+                <li>Samples paths of Brownian motion lie in $\mathcal B$ almost surely.</li>
+                <li>The map $(f,g)\mapsto\int_0^{\cdot} f_t\dot g_t\,\dd t$ defined on smooth functions extends to a continuous map from $\mathcal B\times\mathcal B$ into $\mathcal C([0,1])$</li>
+            </ul>
+        </i>
+        This means that there exists no function space that contains typical realisations of Brownian motion and that allows for a continuous integration theory naturally extending integration for smooth functions.
+        Even tough people understood this a long time ago, Lyons' theorem provides a quantitative answer to the claim that stochastic integration is analytically ill-posed by nature. 
     </p>
   <div class="citations">
     <h5>Citations</h5>
@@ -131,8 +179,6 @@
     <div id="footnote0">[0] Random does not mean rough but most interesting random objects are rough.</div>
     <div id="footnote1">[1] This memoir was written by Itô as an extension and as an English translation of an article written in Japanese in 1942.</div>
     <div id="footnote2">[2] To be compared with the method of parabolic equations due to Kolmogorov, which relies on the parabolic partial differential equation \(\partial_tp=Lp\) to define transition probabilities. The Kolmogorov extension theorem then serves to obtain the existence of a corresponding Markov process, and lastly, the Kolmogorov continuity theorem allows to obtain a continuous modification.</div>
-    <div id="footnote3">[3] But which is central in Terry Lyons' work.</div>
-    <div id="footnote4">[4] Stieltjes-type integrals where the integrator can have finite \(p\)-variation as long as the integrand has finite \(q\)-variation and \(p^{-1}+q^{-1}>1\). If it were the case that \(\|B\|_{p-\text{var}}<\infty\) a.s. for some \(1&lt;p&lt;2\), then one could make sense of the integrals which appear in SDEs without resorting to further probabilistic arguments.</div>
   </div>
     </div>
     <div id="footer"></div>
