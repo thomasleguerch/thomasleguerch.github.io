@@ -1,9 +1,17 @@
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  document.documentElement.setAttribute("data-theme", savedTheme);
+}
+
+// Toggle theme
 function toggleTheme() {
-  const current = document.documentElement.getAttribute("data-theme");
-  document.documentElement.setAttribute(
-    "data-theme",
-    current === "dark" ? "light" : "dark"
-  );
+  const root = document.documentElement;
+
+  const isDark = root.getAttribute("data-theme") === "dark";
+  const newTheme = isDark ? "light" : "dark";
+
+  root.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
 }
 
 // 📦 Load components (header/footer)
@@ -21,18 +29,27 @@ window.addEventListener("DOMContentLoaded", () => {
   loadComponent("footer", "components/footer.html");
 });
 
-function setFontSize(size) {
-  document.documentElement.style.setProperty('--font-size', size + 'px');
+// Apply saved font size on every page load
+const savedSize = localStorage.getItem("fontSize");
+
+if (savedSize) {
+  document.documentElement.style.setProperty("--font-size", savedSize + "px");
 }
 
-let size = 16;
-
+// Increase font size
 function increaseText() {
+  let size = parseInt(localStorage.getItem("fontSize") || "16");
   size += 2;
-  setFontSize(size);
+
+  document.documentElement.style.setProperty("--font-size", size + "px");
+  localStorage.setItem("fontSize", size);
 }
 
+// Decrease font size
 function decreaseText() {
+  let size = parseInt(localStorage.getItem("fontSize") || "16");
   size -= 2;
-  setFontSize(size);
+
+  document.documentElement.style.setProperty("--font-size", size + "px");
+  localStorage.setItem("fontSize", size);
 }
