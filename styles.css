@@ -76,15 +76,13 @@ footer {
   bottom: 0;
 }
 
-#main {
-float:right;
-width:80%;
-}
-
 #face {
 float:left;
 }
 
+.footnotes {
+  font-size: calc(var(--font-size) - 4px);
+}
 
 /* ================================
    SCROLLABLE LABELED EQUATIONS

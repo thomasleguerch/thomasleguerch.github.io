@@ -77,19 +77,21 @@
       \begin{equation}\label{eq:proto_SDE_integral}
           x_t=x_0+\int_0^tb(x_s)\,\dd s+\int_0^t\sigma(x_s)\,\dd g_s\,.
       \end{equation}
-      Equation \eqref{eq:proto_SDE_integral} is as problematic as \eqref{eq:ODE_with_noise} from an analytical point of view.
+      Having in mind functions $g$ that are typical realisations of $B$, equation \eqref{eq:proto_SDE_integral} is as problematic as \eqref{eq:ODE_with_noise} from an analytical point of view.
       This time, the issue is not about multiplying a distribution with a non-smooth function, it is about integrating a function with respect to another one 
       without any guarantee on their regularity. Indeed, to make sense of the integral with respect to $g$, one could expect to rely on Stieltjes integrals,
       but one would need $g$ to be Lipschitz or BV. This analytical problem is equivalent to multiplying a distribution with a non-smooth function.
     </p>
     <p>
-      And yet, in stochastic analysis textbooks, the author always pulls <i>Itô integrals</i> out of the hat.
-      At this point, they keep quiet about the fact that this approach required $\xi$ to be Gaussian white noise. In the context of physical or financial modelling, many other types of random inputs would make perfect sense,
-      but it is impossible to model them using Itô integrals.
-      Yet, countless books offer an introduction to Itô calculus without explicitly referring to this significant limitation.
+      And yet, the authors of stochastic analysis textbooks rarely ponder on the analytical difficulty posed by making sense to \eqref{eq:proto_SDE_integral}
+      for typical realisations of $B$. Instead, they usually pull <i>Itô integrals</i> out of the hat.
+      At this point, they usually keep quiet about the fact that Itô integrals an only really useful when $B$ is a Brownian motion (equivalently $\xi$ is Gaussian white noise).
     </p>
     <p>
-        In most contexts, Itô calculus and stochastic calculus are used interchangeably, but Itô calculus has a very narrow scope.
+      In the context of physical or financial modelling, many other types of random inputs would make perfect sense,
+      but Itô integrals are of no help.
+      Countless books offer an introduction to Itô calculus without explicitly referring to this significant limitation.
+      In such books, &laquo; Itô calculus &raquo; and &laquo; stochastic calculus &raquo; are used interchangeably, but Itô calculus has a very narrow scope.
     </p>
     <p>
       We will rely on \cite{IW,KS,RY} and the seminal work \cite{Ito} <a href="#footnote1">[1]</a> to recount a more accurate history.
@@ -112,7 +114,7 @@
     \end{equation}
 
     where the matrix \(a(x)\) is symmetric and non-negative (see \cite{RY}, p. 267). These Markov processes are called diffusions.
-    Let us suppose that there exists a Markov process \(X\) with generator \eqref{eq:generator_general}. The generator suggests that between times \(t\) and \(t+h\), \(X\) satisfies
+    Let us suppose that there exists a Markov process \(X\) with generator \eqref{eq:generator_general}. Taking the generator at face value suggests that between times \(t\) and \(t+h\), \(X\) satisfies
     
     \begin{equation*}
         X_{t+h}=X_t+b(X_t)h+\sigma(X_t)(W_{t+h}-W_t)+o(h)\,,
@@ -126,11 +128,15 @@
 
     Notice how \eqref{eq:SDE} resembles \eqref{eq:proto_SDE_integral}, even tough we obtained them in unrelated ways.
     The analytical problem we already mentioned still persists, but this time $W$ is naturally a Brownian motion.
-    Apparently, this is how SDEs first appeared historically. People noticed that if one came up with a way of defining the second integral appearing in \eqref{eq:SDE}, then one could construct \(X\) as the solution to \eqref{eq:SDE}.
+    </p>
+    <p>
+    This is how SDEs first appeared historically. People noticed that some Markov processes ought to satisfy <i>stochastic differential equations</i>.
+    If one came up with a way of defining the (analytically challenging) second integral appearing in \eqref{eq:SDE}, then one could construct \(X\) as the solution to \eqref{eq:SDE}.
     According to \cite{IW,KS}, this approach to diffusions was proposed by P. Lévy and is dubbed in \cite{KS} as the <i>methodology of stochastic differential equations</i> <a href="#footnote2">[2]</a>.
     The merit of defining the <i>stochastic integral</i> with respect to \(W\) rests on Itô and is presented in \cite{Ito}.
     </p>
     <h4>Analytical trouble, Young integrals and the \(p\)-variation</h4>
+    This section is about attempts to make sense of integrals with respect to $B$ relying on real analysis.
     <p>
         Bearing in mind that we wish to make sense of integrals of the type
         $$
@@ -140,38 +146,56 @@
         \begin{equation}\label{eq:riemann_sums}
             \sum_i f_{t_i}(g_{t_{i+1}}-g_{t_i})
         \end{equation}
-        when the mesh of the partition goes to $0$. Let us introduce $p$-variation, which is of particular interest when it comes to giving criteria for the convergence of Riemann sums. <br>
+        when the mesh of the partition goes to $0$. One may argue that Riemann sums are too simplistic, especially because we know that
+        modern integration theory is based on the Lebesgue integral. That is true, but $B$ is not BV, so there is no hope to interpret stochastic integrals as Lebesgue integrals with respect to a random measure.
+        To put it in a straightforward way, $\dd B$ is not a measure.
+      </p>
+      <p>
+        Let us introduce $p$-variation, which is of particular interest when it comes to giving criteria for the convergence of Riemann sums. <br>
         <b>Definition</b> <i>We define the \(p\)-variation on the interval \(I\subset[0,\infty)\) of any function \(f:[0,\infty)\rightarrow\mathbb R\) as the quantity
           \begin{equation*}
               \|f\|_{p-\text{var}}^I:=\sup_{D(I)}\left(\sum_{k}(f(t_{k+1})-f(t_k))^p\right)^{1/p}\,,
           \end{equation*}
         where the supremum runs over all subdivisions of \(I\).</i><br>
-        <b>Remark</b> <i>A fact which is rarely mentioned, but is central in Terry Lyons' work, is that quadratic variation is different from \(2\)-variation.<br></i>
-        Here is the general criterion for the convergence Riemann-sums under $p$-variation hypotheses:<br>
+      </p>
+      <p>
+        <b>Remark</b> <i>A fact which is rarely mentioned in stochastic analysis textbooks, but is central in rough paths theory, is that \(2\)-variation is different from quadratic variation.
+          For instance, $B$ famously has a finite quadratic variation, but we will soon see that its $2$-variation is infinite.<br></i>
+      </p>
+      <p>
+        Here is the general criterion for the convergence of Riemann sums under $p$-variation hypotheses:<br>
         <b>Theorem</b> <i>If $\|f\|_{p-\text{var}}^{[0,t]}&lt\infty$ and $\|g\|_{q-\text{var}}^{[0,t]}&lt\infty$ with $p^{-1}+q^{-1}>1$, then the Riemann-sums converge
             along any sequence of subvisions of $[0,t]$ with vanishing mesh, to the same limit.
-            We call this limit the Young-Kondurar integral of $f$ w.r.t. $g$.
-        </i><br> 
-
+            We call this unique limit the Young-Kondurar integral of $f$ w.r.t. $g$.
+        </i><br>
+      </p>
+      <p>
         The previous theorem is pretty significant, because the solution $x$ to \eqref{eq:proto_SDE_integral} is known to inherit its regularity from that of $g$.
-        This means that $q=p$, and even assuming $\sigma$ to be smooth, the criterion requires $p&lt2$. At this point, there is still hope that Young integrals are enoug to make sense of
+        This means that, even assuming $\sigma$ to be smooth, we expect that $q=p$, and the criterion requires $p&lt2$. At this point, there is still hope that Young integrals are enoug to make sense of
         \eqref{eq:SDE}, but unfortunately:<br>
         <b>Theorem</b> <i>For every \(p\le2\), for every interval \(I\subset[0,\infty)\), \(\|B\|_{p-\text{var}}^I=\infty\) a.s. In particular, a.s., \(B\) has infinite 2-variation over all intervals.
         The same result holds for any continuous semimartingale.</i><br>
+      </p>
+      <p>
         Quite often, courses on stochastic analysis insist that \(B\) has infinite variation (infinite \(1\)-variation) over all intervals, ruling out the possibility to use Stieltjes integrals to make sense of \eqref{eq:SDE}.
-        Much more crucially, the previous theorem rules out Young-Kondurar integrals altogether.
+        Much more crucially, the previous theorem rules out Young-Kondurar integrals altogether. This is a very significant analytical fact.
+      </p>
+      <p>
+        <b>Remark</b> <i>En passant, we learned that controlled equations of the type \eqref{eq:ODE_controlled} can be made sense of by \eqref{eq:proto_SDE_integral} where the integral w.r.t. to $g$ is a Young integral,
+        as long as $g$ has finite $p$-variation with $p&lt2$.</i>
     </p>
     <p>
-        One might expect that $p$-variation is not the final answer, but here comes the final nail in the coffin. <br>
+        One might expect that $p$-variation is not the final answer, as there exist other ways to measure the regularity of functions, but here comes the final nail in the coffin. <br>
         <b>Theorem</b> (Lyons 91) <i>There exists no separable Banach space $\mathcal B\subset\mathcal C([0,1])$ with the following properties
             <ul>
                 <li>Samples paths of Brownian motion lie in $\mathcal B$ almost surely.</li>
-                <li>The map $(f,g)\mapsto\int_0^{\cdot} f_t\dot g_t\,\dd t$ defined on smooth functions extends to a continuous map from $\mathcal B\times\mathcal B$ into $\mathcal C([0,1])$</li>
+                <li>The map $(f,g)\mapsto\int_0^{\cdot} f_t\dot g_t\,\dd t$ defined on smooth functions extends to a continuous map from $\mathcal B\times\mathcal B$ into $\mathcal C([0,1])$.</li>
             </ul>
         </i>
         This means that there exists no function space that contains typical realisations of Brownian motion and that allows for a continuous integration theory naturally extending integration for smooth functions.
         Even tough people understood this a long time ago, Lyons' theorem provides a quantitative answer to the claim that stochastic integration is analytically ill-posed by nature. 
     </p>
+    <h4>Mollifying the noise</h4>
   <div class="citations">
     <h5>Citations</h5>
   </div>
