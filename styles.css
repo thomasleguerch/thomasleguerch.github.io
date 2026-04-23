@@ -8,6 +8,9 @@ body {
   font-size: var(--font-size);
   text-justify: inter-word;
   font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
