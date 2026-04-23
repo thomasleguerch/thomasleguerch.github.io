@@ -4,7 +4,9 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
   <script>
     window.MathJax = {
-      enableMenu: true,
+      options: {
+        enableMenu: false
+      },
       tex: {
         tags: 'ams',
         macros: {
@@ -13,18 +15,25 @@
       }
     };
   </script>
+  <script src="script.js"></script>
   <head>
     <title>Personal webpage of Thomas Le Guerch</title>
     <meta charset="utf-8"/>
   </head>
   <body>
+    <div id="header"></div>
+    <div id="main">
     <h1>Personal webpage of Thomas Le Guerch</h1>
-      <p>PhD student<br>Université Paris Cité<br>leguerch[at]lpsm.paris.</p>
-      <img src="informal_face.jpg" />
+    <div id="short_bio">
+      <img src="informal_face.jpg" id="face" style="width: 6%; height: auto;" float:left;/>
+      <p>
+        PhD student<br>Université Paris Cité<br>leguerch[at]lpsm.paris.
+      </p>
       <p>
       J'effectue depuis octobre 2024 mon doctorat au LPSM sous la direction de <a href="https://perso.lpsm.paris/~clabbe/">Cyril Labbé</a> et <a href="https://www.lpsm.paris/users/zambotti/index">Lorenzo Zambotti</a>.
       Mon projet de thèse s'intitule <i>Fluctuations de modèles critiques et régularisation par le bruit d'équations aux dérivées partielles stochastiques avec dérive distributionnelle</i>.
       </p>
+    </div>
     <h3>Enseignement</h3>
       <ul>
         <li>LU3MA232 &mdash; Analyse numérique &mdash; 2024-2025</li>
@@ -150,8 +159,7 @@
     <div id="footnote3">[3] But which is central in Terry Lyons' work.</div>
     <div id="footnote4">[4] Stieltjes-type integrals where the integrator can have finite \(p\)-variation as long as the integrand has finite \(q\)-variation and \(p^{-1}+q^{-1}>1\). If it were the case that \(\|B\|_{p-\text{var}}<\infty\) a.s. for some \(1&lt;p&lt;2\), then one could make sense of the integrals which appear in SDEs without resorting to further probabilistic arguments.</div>
   </div>
+  </div>
+  <div id="footer"></div>
   </body>
-  <footer>
-    <small>2026 - Thomas Le Guerch</small>
-  </footer>
 </html>

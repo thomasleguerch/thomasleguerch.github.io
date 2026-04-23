@@ -1,10 +1,11 @@
+:root {
+  --font-size: 16px;
+}
+
 body {
-  background-color: #1E1E1E;
-  color: #E0E0E0;
-  margin-top: 100px;
-  margin-bottom: 100px;
-  margin-right: 150px;
-  margin-left: 150px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--font-size);
   text-justify: inter-word;
   font-family: 'Open Sans', sans-serif;
 }
@@ -30,6 +31,25 @@ footer {
   color: #F8FAFC;
 }
 
-mjx-container[jax="CHTML"] a.mjx-ref {
-  color: green !important;
+#sidebar {
+position: fixed;
+float:left;
+width:5%;
+margin-left: 2%;
+}
+
+#main {
+float:right;
+width:80%;
+}
+
+#face {
+float:left;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+  --accent: #60a5fa;
+  --card: #1e293b;
 }
