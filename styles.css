@@ -1,5 +1,16 @@
 :root {
-  --font-size: 16px;
+  --font-size: 20px;
+  --header-footer-bg: rgba(255, 255, 255, 0.7);
+  --header-footer-border: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+  --accent: #60a5fa;
+  --card: #1e293b;
+  --header-footer-bg: rgba(15, 23, 42, 0.7);
+  --header-footer-border: rgba(255, 255, 255, 0.08);
 }
 
 main {
@@ -33,9 +44,9 @@ a:visited {
   color: #A78BFA;
 }
 
-header {
+header,
+footer {
   position: fixed;
-  top: 0;
   left: 0;
   width: 100%;
 
@@ -47,22 +58,19 @@ header {
   background: var(--bg);
   color: var(--text);
   z-index: 1000;
+  background: var(--header-footer-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-color: var(--header-footer-border);
+}
+
+header {
+  top: 0;
 }
 
 footer {
-  position: fixed;
   bottom: 0;
-  left: 0;
-  width: 100%;
-
-  display: flex;
-  justify-content: center;  /* centers content horizontally */
-  align-items: center;       /* centers vertically */
-
-  height: 60px;
-  background: var(--bg);
-  color: var(--text);
-  z-index: 1000;
 }
 
 #main {
@@ -72,11 +80,4 @@ width:80%;
 
 #face {
 float:left;
-}
-
-[data-theme="dark"] {
-  --bg: #0f172a;
-  --text: #e5e7eb;
-  --accent: #60a5fa;
-  --card: #1e293b;
 }
