@@ -85,14 +85,42 @@ width:80%;
 float:left;
 }
 
-mjx-container[display="true"] {
-  display: block;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+
+/* ================================
+   SCROLLABLE LABELED EQUATIONS
+   MathJax v3 (equation, align, tag)
+================================ */
+
+/* 1. OUTER CONTAINER SCROLL */
+mjx-container[jax="CHTML"][display="true"] {
+  display: block !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
-mjx-container[display="true"] > mjx-math {
-  display: inline-block;
-  min-width: max-content;
+/* 2. FORCE AMS TABLE TO DEFINE WIDTH (CRITICAL) */
+mjx-container[jax="CHTML"] mjx-mtable {
+  display: inline-block !important;
+  width: max-content !important;
+  min-width: 100% !important;
 }
+
+/* 3. PREVENT ROW SHRINKING */
+mjx-container[jax="CHTML"] mjx-mtr {
+  width: max-content !important;
+}
+
+/* 4. EQUATION NUMBER FIX (so it doesn’t break layout) */
+mjx-container[jax="CHTML"] mjx-eqn {
+  position: sticky;
+  right: 0;
+  background: inherit;
+}
+
+/* 5. SAFETY: prevent flex/grid parents breaking scroll */
+mjx-container {
+  min-width: 0 !important;
+}
+mjx-mtable { width: max-content; }
