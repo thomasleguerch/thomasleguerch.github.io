@@ -89,10 +89,9 @@ mjx-container {
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  font-size: 0.9em;
 }
 
 mjx-container > mjx-math {
   display: inline-block;
-  min-width: max-content;
+  min-width: 100%;
 }
