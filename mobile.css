@@ -22,4 +22,7 @@
 	footer {
 		height: 10%;
 	}
+	mjx-container {
+    font-size: 90%;
+  }
 }

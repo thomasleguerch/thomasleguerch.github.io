@@ -81,3 +81,11 @@ width:80%;
 #face {
 float:left;
 }
+
+mjx-container {
+  font-size: 0.9em;
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
