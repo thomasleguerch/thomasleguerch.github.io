@@ -85,14 +85,14 @@ width:80%;
 float:left;
 }
 
-mjx-container {
+mjx-container[display="true"] {
   display: block;
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }
 
-mjx-container > mjx-math {
+mjx-container[display="true"] > mjx-math {
   display: inline-block;
-  min-width: 100%;
+  min-width: max-content;
 }
