@@ -13,14 +13,14 @@
   --header-footer-border: rgba(255, 255, 255, 0.08);
 }
 
-main {
+#main {
   flex: 1;
+  font-size: var(--font-size);
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-size: var(--font-size);
   text-justify: inter-word;
   font-family: 'Open Sans', sans-serif;
   display: flex;
