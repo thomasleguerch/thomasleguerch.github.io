@@ -28,6 +28,8 @@ body {
   min-height: 100vh;
   width: 60%;
   margin-left: 20%;
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
 a {
@@ -83,9 +85,14 @@ float:left;
 }
 
 mjx-container {
-  font-size: 0.9em;
   display: block;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  max-width: 100%;
+  font-size: 0.9em;
+}
+
+mjx-container > mjx-math {
+  display: inline-block;
+  min-width: max-content;
 }
