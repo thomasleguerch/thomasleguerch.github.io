@@ -32,17 +32,20 @@
     <div id="main">
 
     <h2>Math blog</h2>
+    <h3>Random functions and their roughness</h3>
+    in progress
     <h3>Stochastic integration and stochastic equations</h3>
     <h4>What is a stochastic differential equation?</h4>
     <p>
       <i>Stochastic integrals are not merely random Lebesgue integrals or Stieltjes integrals. They are fundamentally defined as martingales.
       SDEs are equations that involve stochastic integrals and whose purpose is to define or characterise some Markov processes called diffusion processes.
       SDEs may be used to make sense of ODEs with noise only when the integral of the noise is a semimartingale (the sum of a finite variation process and a martingale).
+      Itô calculus is the stochastic calculus of semimartingales.
       </i>
     </p>
     <h4>The mythology of stochastic differential equations</h4>
     <p>
-      A pedagogical shortcut often taken to introduce stochastic differential equations is to present them as a natural extension of ordinary differential equations (ODE), see for instance \cite{Evans,legall}, p. 209. The ODE
+      Stochastic differential equations are often presented as a natural extension of ordinary differential equations (ODE), see for instance \cite{Evans,legall}, p. 209. The ODE
       \[\dot{x}_t=b(x_t)\]
       can be upgraded to the following &laquo; ODE with noise &raquo;
       \[\dot{X}_t=b(X_t)+\sigma\xi_t\,,\]
@@ -83,7 +86,7 @@
     </p>
     <p>
       And yet, the authors of stochastic analysis textbooks rarely ponder on the analytical difficulty posed by making sense to \eqref{eq:proto_SDE_integral}
-      for typical realisations of $B$. They remark that typical realisations of $B$ are not Lipschitz or BV, and usually pull <i>Itô integrals</i> out of the hat.
+      for typical realisations of $B$. They remark, after Itô and Lévy, that typical realisations of $B$ are not Lipschitz or BV, and usually pull <i>Itô integrals</i> out of the hat.
       At this point, they usually keep quiet about the fact that Itô integrals an only really useful when $B$ is a Brownian motion (equivalently $\xi$ is Gaussian white noise).
     </p>
     <p>
@@ -133,6 +136,15 @@
     If one came up with a way of defining the (analytically challenging) second integral appearing in \eqref{eq:SDE}, then one could construct \(X\) as the solution to \eqref{eq:SDE}.
     According to \cite{IW,KS}, this approach to diffusions was proposed by P. Lévy and is dubbed in \cite{KS} as the <i>methodology of stochastic differential equations</i> <a href="#footnote2">[2]</a>.
     The merit of defining the <i>stochastic integral</i> with respect to \(W\) rests on Itô and is presented in \cite{Ito}.
+    </p>
+    <h4>Itô's breakthrough</h4>
+    <p>
+      Brownian motion is a martingale and martingales are nice. Riemann-type sums like
+      \[\sum_iH_{t_i}(B_{t_{i+1}}-B_{t_i})\]
+      converge in $L^2(\mathbb P)$ provided $H$ is adapted to the filtration of $B$ by Cauchy sequence arguments relying on the martingale property of $B$.
+      The limit is usually denoted
+      \[\int_0^tH_s\,\dd B_s\]
+      but some textbooks prefer $(H\cdot X)_t$ to insist that the integral is not a usual integral.
     </p>
     <h4>Analytical trouble, Young integrals and the \(p\)-variation</h4>
     This section is about attempts to make sense of integrals with respect to $B$ relying on real analysis.
@@ -209,10 +221,22 @@
         Lyons' theorem provides a quantitative answer to the claim that stochastic integration is analytically ill-posed by nature.
     </i>
     </p>
-    <h4>Roughness is scale-dependent</h4>
+    <h4>On a theme of Wong, Zakai and Stratonovich</h4>
     <p>
       A natural way to interpret stochastic differential equations driven by Brownian motion is to approximate the driving noise by smooth processes (e.g. mollification or piecewise linear interpolation) and consider the corresponding classical differential equations.
       From a Physics perspective, this makes sense because white noise is an idealisation of rapidly varying smooth forces.
+    </p>
+    <p>
+      For $\varepsilon&gt;0$, consider $\rho_\varepsilon$ a smooth function with compact support. Let $B$ a Brownian motion and define $B^\varepsilon_t:=(B\star\rho_\varepsilon)_t$. The paths of $B^\varepsilon$ are smooth functions, so the equation
+      \[X^\varepsilon_t=x+\int_0^tb(X^\varepsilon_s)\,\dd s+\int_0^t\sigma(X^\varepsilon_s)\,\dd B^\varepsilon_s\]
+      can be interpreted as a usual ODE involving a Stieltjes integral.
+    </p>
+    <p>
+      It can be proved that $X^\varepsilon$ converges to a process $X$ in $\mathcal C([0,1])$ in probability as $\varepsilon\downarrow0$.
+      Of course, the limiting process $X$ cannot satisfy a similar equation with a Stieltjes, or even a Young integral, as we already understood.
+      However, $X$ satisfies a weaker equation where the integral is an Itô integral.
+      Quite surprisingly, $X$ satisfies
+      \[X_t=x+\int_0^tb(X_s)\,\dd s+\frac12\int_0^t\sigma'(X_s)\sigma(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd B_s\]
     </p>
     <div class="citations">
     <h5>Citations</h5>
