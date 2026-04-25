@@ -40,7 +40,7 @@
       SDEs may be used to make sense of ODEs with noise only when the integral of the noise is a semimartingale (the sum of a finite variation process and a martingale).
       </i>
     </p>
-    <h4>The mythology of stochastic calculus</h4>
+    <h4>The mythology of stochastic differential equations</h4>
     <p>
       A pedagogical shortcut often taken to introduce stochastic differential equations is to present them as a natural extension of ordinary differential equations (ODE), see for instance \cite{Evans,legall}, p. 209. The ODE
       \[\dot{x}_t=b(x_t)\]
@@ -48,7 +48,7 @@
       \[\dot{X}_t=b(X_t)+\sigma\xi_t\,,\]
       where \(\sigma\in\mathbb R\) and \(\xi\) is some random forcing. By random forcing, one could think of an irregular function, but we mean a stochastic process.
       This means that for every $t$, $\xi_t$ is a random variable which depends on a chance parameter $\omega$.
-      Notice that $x$ became $X$, to emphasize that $X$ depends on $\omega$.
+      Notice that $x$ became $X$, to emphasise that $X$ depends on $\omega$.
       The strength parameter \(\sigma\) can be further chosen to depend on \(X_t\):
       \begin{equation}\label{eq:ODE_with_noise}
         \dot{X}_t=b(X_t)+\sigma(X_t)\xi_t\,.
@@ -67,7 +67,6 @@
       This means that it is impossible to make sense of \eqref{eq:ODE_with_noise} for typical realisations of Gaussian white noise.
     </p>
     <p>
-      Making sense of \eqref{eq:ODE_with_noise} when \(\xi\) is truly Gaussian white noise is still possible, provided we interpret the equation in a weaker sense.
       Notice that, even though typical realisations of \(\xi\) are generalised functions, they are the derivative of a true function. In other words, there exists a random process \(B\) (whose typical realisations are true functions)
       such that, in the sense of generalised functions,
       \begin{equation*}
@@ -80,11 +79,11 @@
       Having in mind functions $g$ that are typical realisations of $B$, equation \eqref{eq:proto_SDE_integral} is as problematic as \eqref{eq:ODE_with_noise} from an analytical point of view.
       This time, the issue is not about multiplying a distribution with a non-smooth function, it is about integrating a function with respect to another one 
       without any guarantee on their regularity. Indeed, to make sense of the integral with respect to $g$, one could expect to rely on Stieltjes integrals,
-      but one would need $g$ to be Lipschitz or BV. This analytical problem is equivalent to multiplying a distribution with a non-smooth function.
+      but one would need $g$ to be Lipschitz or BV. This analytical problem is akin to multiplying a distribution with a non-smooth function.
     </p>
     <p>
       And yet, the authors of stochastic analysis textbooks rarely ponder on the analytical difficulty posed by making sense to \eqref{eq:proto_SDE_integral}
-      for typical realisations of $B$. Instead, they usually pull <i>Itô integrals</i> out of the hat.
+      for typical realisations of $B$. They remark that typical realisations of $B$ are not Lipschitz or BV, and usually pull <i>Itô integrals</i> out of the hat.
       At this point, they usually keep quiet about the fact that Itô integrals an only really useful when $B$ is a Brownian motion (equivalently $\xi$ is Gaussian white noise).
     </p>
     <p>
@@ -137,6 +136,8 @@
     </p>
     <h4>Analytical trouble, Young integrals and the \(p\)-variation</h4>
     This section is about attempts to make sense of integrals with respect to $B$ relying on real analysis.
+    That is to say, we are looking for an integration theory which extends Stieltjes integration while being general enough to allow
+    integration with respect to typical realisations of Brownian motion.
     <p>
         Bearing in mind that we wish to make sense of integrals of the type
         $$
@@ -147,8 +148,7 @@
             \sum_i f_{t_i}(g_{t_{i+1}}-g_{t_i})
         \end{equation}
         when the mesh of the partition goes to $0$. One may argue that Riemann sums are too simplistic, especially because we know that
-        modern integration theory is based on the Lebesgue integral. That is true, but $B$ is not BV, so there is no hope to interpret stochastic integrals as Lebesgue integrals with respect to a random measure.
-        To put it in a straightforward way, $\dd B$ is not a measure.
+        modern integration theory is based on the Lebesgue integral. That is true, but $B$ is not BV ($\dd B$ is not a measure), so there is no hope to interpret stochastic integrals as Lebesgue integrals with respect to a random measure.
       </p>
       <p>
         Let us introduce $p$-variation, which is of particular interest when it comes to giving criteria for the convergence of Riemann sums. <br>
@@ -159,44 +159,62 @@
         where the supremum runs over all subdivisions of \(I\).</i><br>
       </p>
       <p>
-        <b>Remark</b> <i>A fact which is rarely mentioned in stochastic analysis textbooks, but is central in rough paths theory, is that \(2\)-variation is different from quadratic variation.
+        <b>Remark</b> <i>\(2\)-variation is different from quadratic variation.
           For instance, $B$ famously has a finite quadratic variation, but we will soon see that its $2$-variation is infinite.<br></i>
       </p>
       <p>
-        Here is the general criterion for the convergence of Riemann sums under $p$-variation hypotheses:<br>
-        <b>Theorem</b> <i>If $\|f\|_{p-\text{var}}^{[0,t]}&lt\infty$ and $\|g\|_{q-\text{var}}^{[0,t]}&lt\infty$ with $p^{-1}+q^{-1}>1$, then the Riemann-sums converge
+        Here is the general criterion for the convergence of Riemann sums under $p$-variation hypotheses:
+      </p>
+      <p>
+        <b>Theorem</b> (Young-Kondurar) <i>If $\|f\|_{p-\text{var}}^{[0,t]}&lt\infty$ and $\|g\|_{q-\text{var}}^{[0,t]}&lt\infty$ with $p^{-1}+q^{-1}>1$, then the Riemann-sums converge
             along any sequence of subvisions of $[0,t]$ with vanishing mesh, to the same limit.
             We call this unique limit the Young-Kondurar integral of $f$ w.r.t. $g$.
         </i><br>
       </p>
       <p>
+        <b>Remark</b> Stieltjes integrals correspond to $q=1$ and any $p\ge1$.<br>
+      </p>
+      <p>
         The previous theorem is pretty significant, because the solution $x$ to \eqref{eq:proto_SDE_integral} is known to inherit its regularity from that of $g$.
         This means that, even assuming $\sigma$ to be smooth, we expect that $q=p$, and the criterion requires $p&lt2$. At this point, there is still hope that Young integrals are enoug to make sense of
-        \eqref{eq:SDE}, but unfortunately:<br>
+        \eqref{eq:SDE}, but unfortunately:
+      </p>
+      <p>
         <b>Theorem</b> <i>For every \(p\le2\), for every interval \(I\subset[0,\infty)\), \(\|B\|_{p-\text{var}}^I=\infty\) a.s. In particular, a.s., \(B\) has infinite 2-variation over all intervals.
         The same result holds for any continuous semimartingale.</i><br>
       </p>
       <p>
         Quite often, courses on stochastic analysis insist that \(B\) has infinite variation (infinite \(1\)-variation) over all intervals, ruling out the possibility to use Stieltjes integrals to make sense of \eqref{eq:SDE}.
-        Much more crucially, the previous theorem rules out Young-Kondurar integrals altogether. This is a very significant analytical fact.
+        The previous theorem rules out Young-Kondurar integrals altogether. This is a very significant analytical fact.
       </p>
       <p>
         <b>Remark</b> <i>En passant, we learned that controlled equations of the type \eqref{eq:ODE_controlled} can be made sense of by \eqref{eq:proto_SDE_integral} where the integral w.r.t. to $g$ is a Young integral,
         as long as $g$ has finite $p$-variation with $p&lt2$.</i>
     </p>
     <p>
-        One might expect that $p$-variation is not the final answer, as there exist other ways to measure the regularity of functions, but here comes the final nail in the coffin. <br>
+        One might expect that $p$-variation is not the final answer, as there exist other ways to measure the regularity of functions, but here comes the final nail in the coffin.
+    </p>
+    <p>
         <b>Theorem</b> (Lyons 91) <i>There exists no separable Banach space $\mathcal B\subset\mathcal C([0,1])$ with the following properties
             <ul>
                 <li>Samples paths of Brownian motion lie in $\mathcal B$ almost surely.</li>
                 <li>The map $(f,g)\mapsto\int_0^{\cdot} f_t\dot g_t\,\dd t$ defined on smooth functions extends to a continuous map from $\mathcal B\times\mathcal B$ into $\mathcal C([0,1])$.</li>
             </ul>
         </i>
-        This means that there exists no function space that contains typical realisations of Brownian motion and that allows for a continuous integration theory naturally extending integration for smooth functions.
-        Even tough people understood this a long time ago, Lyons' theorem provides a quantitative answer to the claim that stochastic integration is analytically ill-posed by nature. 
     </p>
-    <h4>Mollifying the noise</h4>
-  <div class="citations">
+    <p>
+      <b>Remark</b><i>
+        In particular, there exists no Banach topology on $\mathcal C([0,1])$ strong enough to keep the Sieltjes integral
+        continuous in its arguments and weak enough to allow smooth paths to converge to Brownian paths.
+        Lyons' theorem provides a quantitative answer to the claim that stochastic integration is analytically ill-posed by nature.
+    </i>
+    </p>
+    <h4>Roughness is scale-dependent</h4>
+    <p>
+      A natural way to interpret stochastic differential equations driven by Brownian motion is to approximate the driving noise by smooth processes (e.g. mollification or piecewise linear interpolation) and consider the corresponding classical differential equations.
+      From a Physics perspective, this makes sense because white noise is an idealisation of rapidly varying smooth forces.
+    </p>
+    <div class="citations">
     <h5>Citations</h5>
   </div>
   <div class="footnotes">

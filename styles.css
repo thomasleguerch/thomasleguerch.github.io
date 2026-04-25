@@ -49,6 +49,7 @@ a:visited {
 
 header,
 footer {
+  font-size: 24 px;
   position: fixed;
   left: 0;
   width: 100%;
@@ -122,3 +123,9 @@ mjx-container {
   min-width: 0 !important;
 }
 mjx-mtable { width: max-content; }
+
+mjx-container a[href*="mjx-eqn"] {
+  color: #60a5fa;
+}
+
+mjx-container a.mjx-xref:visited { color: #a78bfa !important; }
