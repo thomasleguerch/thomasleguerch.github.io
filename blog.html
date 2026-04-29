@@ -10,8 +10,11 @@
         enableMenu: false,
         enableExplorer: false
       },
+      loader: {
+        load: ['[tex]/bbm']
+      },
       tex: {
-        packages: {'[+]': ['mathrsfs']},
+        packages: {'[+]': ['mathrsfs', 'bbm']},
         displayMath: [['$$', '$$'], ['\\[', '\\]' ]],
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         tags: 'ams',
@@ -34,16 +37,84 @@
     <h2>Math blog</h2>
     <h3>Random functions and their roughness</h3>
     in progress
-    <h3>Stochastic integration and stochastic equations</h3>
-    <h4>What is a stochastic differential equation?</h4>
+    <h3>Stochastic Integration and Stochastic Equations</h3>
     <p>
-      <i>Stochastic integrals are not merely random Lebesgue integrals or Stieltjes integrals. They are fundamentally defined as martingales.
-      SDEs are equations that involve stochastic integrals and whose purpose is to define or characterise some Markov processes called diffusion processes.
-      SDEs may be used to make sense of ODEs with noise only when the integral of the noise is a semimartingale (the sum of a finite variation process and a martingale).
-      Itô calculus is the stochastic calculus of semimartingales.
-      </i>
+      I wish to emphasize a few points which I feel are little known
+      <ul>
+        <li>Brownian motion is critical with respect to ordinary calculus. Brownian-driven differential equations can <i>almost</i> be made sense of using Young integrals.</li>
+        <li>Stochastic calculus is a vague term referring to a set of tools (integral, derivative, chain rule) fit for the study of stochastic processes.</li>
+        <li>Stochastic calculus is not an extension of ordinary calculus. Rather than relying on the regularity of functions, it relies on probabilistic properties of stochastic processes.</li>
+        <li>Itô calculus is the stochastic calculus of semimartingales.</li>
+        <li>In the narrowest sense, stochastic differential equations are equations involving an Itô integral.</li>
+        <li>Stochastic differential equations may be used to model dynamical systems disturbed by noise. This is possible only when the noise is a semimartingale.</li>
+        </ul>
     </p>
-    <h4>The mythology of stochastic differential equations</h4>
+    <p>
+        <center>
+      <table>
+  <caption>
+    Partial chronology of stochastic calculus
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">Year</th>
+      <th scope="col">Author</th>
+      <th scope="col">Discovery</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1900</th>
+      <td>L. Bachelier</td>
+      <td>First modeled a process similar to Brownian motion and linked it to heat equation.</td>
+    </tr>
+    <tr>
+      <th scope="row">1905</th>
+      <td>A. Einstein</td>
+      <td>Independently derived the heat equation from the assumption that molecules move like Brownian motions.</td>
+    </tr>
+    <tr>
+      <th scope="row">1923-24</th>
+      <td>N. Wiener</td>
+      <td>Gave the first rigorous construction of Brownian motion as a random series.</td>
+    </tr>
+    <tr>
+      <th scope="row">1930s</th>
+      <td>P. Lévy</td>
+      <td>Brownian paths have infinite variation over compacts.</td>
+    </tr>
+    <tr>
+      <th scope="row">1933</th>
+      <td>A. Kolmogorov</td>
+      <td>Introduced modern probability axioms.</td>
+    </tr>
+    <tr>
+      <th scope="row">1934</th>
+      <td>R. Paley & N. Wiener</td>
+      <td>Introduced integrals with respect to Brownian motion for deterministic functions.</td>
+    </tr>
+    <tr>
+      <th scope="row">1940s</th>
+      <td>K. Itô</td>
+      <td>Introduced the Itô integral and developped Itô calculus.</td>
+    </tr>
+    <tr>
+      <th scope="row">1964-66</th>
+      <td>R. Stratonovich & D. Fisk</td>
+      <td>Introduced a symmetric integral.</td>
+    </tr>
+    <tr>
+      <th scope="row">1965</th>
+      <td>E. Wong & M. Zakai</td>
+      <td>Proved that natural approximations of the noise give rise to Fisk-Stratonovich integrals.</td>
+    </tr>
+  </tbody>
+</table>
+
+          </center>
+    </p>
+
+    <h4>A pedagogical reordering of History</h4>
     <p>
       Stochastic differential equations are often presented as a natural extension of ordinary differential equations (ODE), see for instance \cite{Evans,legall}, p. 209. The ODE
       \[\dot{x}_t=b(x_t)\]
@@ -80,15 +151,15 @@
           x_t=x_0+\int_0^tb(x_s)\,\dd s+\int_0^t\sigma(x_s)\,\dd g_s\,.
       \end{equation}
       Having in mind functions $g$ that are typical realisations of $B$, equation \eqref{eq:proto_SDE_integral} is as problematic as \eqref{eq:ODE_with_noise} from an analytical point of view.
-      This time, the issue is not about multiplying a distribution with a non-smooth function, it is about integrating a function with respect to another one 
-      without any guarantee on their regularity. Indeed, to make sense of the integral with respect to $g$, one could expect to rely on Stieltjes integrals,
+      This time, the issue is not about multiplying a distribution with a non-smooth function, it is about making sense of the integral w.r.t. to $g$.
+      One could expect to rely on Stieltjes integrals,
       but one would need $g$ to be Lipschitz or BV. This analytical problem is akin to multiplying a distribution with a non-smooth function.
     </p>
     <p>
-      And yet, the authors of stochastic analysis textbooks rarely ponder on the analytical difficulty posed by making sense to \eqref{eq:proto_SDE_integral}
-      for typical realisations of $B$. They remark, after Itô and Lévy, that typical realisations of $B$ are not Lipschitz or BV, and usually pull <i>Itô integrals</i> out of the hat.
-      At this point, they usually keep quiet about the fact that Itô integrals an only really useful when $B$ is a Brownian motion (equivalently $\xi$ is Gaussian white noise).
+      The authors of modern stochastic analysis textbooks usually remark &mdash; after Lévy and Itô &mdash; that typical realisations of $B$ are not Lipschitz or BV, and usually pull <i>Itô integrals</i> out of the hat.
+      At this point, they usually keep quiet about the fact that Itô integrals are only really useful when $B$ is a Brownian motion (equivalently $\xi$ is Gaussian white noise).
     </p>
+    <h5>How is this a reordering of History?</h5>
     <p>
       In the context of physical or financial modelling, many other types of random inputs would make perfect sense,
       but Itô integrals are of no help.
@@ -128,7 +199,7 @@
         X_t=x+\int_0^tb(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd W_s\,.
     \end{equation}
 
-    Notice how \eqref{eq:SDE} resembles \eqref{eq:proto_SDE_integral}, even tough we obtained them in unrelated ways.
+    Notice how \eqref{eq:SDE} resembles \eqref{eq:proto_SDE_integral}, even though we obtained them in unrelated ways.
     The analytical problem we already mentioned still persists, but this time $W$ is naturally a Brownian motion.
     </p>
     <p>
@@ -137,14 +208,35 @@
     According to \cite{IW,KS}, this approach to diffusions was proposed by P. Lévy and is dubbed in \cite{KS} as the <i>methodology of stochastic differential equations</i> <a href="#footnote2">[2]</a>.
     The merit of defining the <i>stochastic integral</i> with respect to \(W\) rests on Itô and is presented in \cite{Ito}.
     </p>
-    <h4>Itô's breakthrough</h4>
+    <h5>Itô's breakthrough &mdash; Itô calculus</h5>
     <p>
-      Brownian motion is a martingale and martingales are nice. Riemann-type sums like
+      In modern parlance, Itô noticed that Riemann-type sums like
       \[\sum_iH_{t_i}(B_{t_{i+1}}-B_{t_i})\]
-      converge in $L^2(\mathbb P)$ provided $H$ is adapted to the filtration of $B$ by Cauchy sequence arguments relying on the martingale property of $B$.
+      converge in $L^2(\mathbb P)$ along sequences of partitions with vanishing mesh, provided $H$ is adapted to the filtration of $B$.
+      This relies on the martingale property of $B$ and on the so-called Itô isometry:
+      <p>
+        <b>Theorem</b> (Itô isometry) <i>
+          For every process $H$ that reads
+      \begin{equation}\label{eq:simple_process}
+      H_t=\sum_{i}H_i\mathbbm{1}_{]t_i,t_{i+1}]}(t)\,,
+      \end{equation}
+      denote the associated Riemann-type sum
+      \[(H\cdot B)_t:=\sum_iH_i(B_{t_{i+1}\wedge t}-B_{t_i\wedge t})\,.\]
+      Then,
+      \begin{equation}\label{eq:ito_isometry}
+      \mathbb E\left[(H\cdot B)_t^2\right]=\int_0^t\mathbb E[H_s^2]\,\dd s\,.
+      \end{equation}
+        </i>
+      </p>
+      The Itô isometry \eqref{eq:ito_isometry} essentially means that a convenient Itô integral $(H\cdot B)_t$ exists for every adapted process $H$ such that $\int_0^t\mathbb E[H_s^2]\,\dd s&lt;\infty$.
+      This is done by approximating $H$ by processes of the type \eqref{eq:simple_process} and taking limit in the right spaces.
       The limit is usually denoted
-      \[\int_0^tH_s\,\dd B_s\]
-      but some textbooks prefer $(H\cdot X)_t$ to insist that the integral is not a usual integral.
+      \[\int_0^tH_s\,\dd B_s\,,\ \text{or}\ (H\cdot X)_t\,.\]
+      The second notation is more pedagogical. It emphasises that the integral is not a usual integral.
+      The single most important mathematical fact behind the Itô integral is the Itô isometry.
+    </p>
+    <p>
+      What makes Itô calculus a <i>calculus</i> is the Itô formula and the Itô isometry.
     </p>
     <h4>Analytical trouble, Young integrals and the \(p\)-variation</h4>
     This section is about attempts to make sense of integrals with respect to $B$ relying on real analysis.
@@ -236,7 +328,8 @@
       Of course, the limiting process $X$ cannot satisfy a similar equation with a Stieltjes, or even a Young integral, as we already understood.
       However, $X$ satisfies a weaker equation where the integral is an Itô integral.
       Quite surprisingly, $X$ satisfies
-      \[X_t=x+\int_0^tb(X_s)\,\dd s+\frac12\int_0^t\sigma'(X_s)\sigma(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd B_s\]
+      \[X_t=x+\int_0^tb(X_s)\,\dd s+\frac12\int_0^t\sigma'(X_s)\sigma(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd B_s\,.\]
+      Notice the appearance of an extra term.
     </p>
     <div class="citations">
     <h5>Citations</h5>

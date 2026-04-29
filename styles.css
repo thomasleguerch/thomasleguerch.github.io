@@ -125,7 +125,45 @@ mjx-container {
 mjx-mtable { width: max-content; }
 
 mjx-container a[href*="mjx-eqn"] {
-  color: #60a5fa;
+  color: #bb6627;
 }
 
-mjx-container a.mjx-xref:visited { color: #a78bfa !important; }
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(140 140 140);
+  font-size: calc(var(--font-size) - 4px);
+  letter-spacing: 1px;
+}
+
+caption {
+  caption-side: bottom;
+  padding: calc(var(--font-size));
+  font-weight: bold;
+}
+
+thead,
+tfoot {
+  background-color: var(--bg);
+}
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+}
+
+td:last-of-type {
+  text-align: center;
+}
+
+tbody > tr:nth-of-type(even) {
+  background-color: var(--bg);
+}
+
+tfoot th {
+  text-align: right;
+}
+
+tfoot td {
+  font-weight: bold;
+}
