@@ -1,0 +1,114 @@
+{
+  "legall": {
+    "type": "book",
+    "author": ["Le Gall, J.-F."],
+    "title": "Brownian Motion, Martingales, and Stochastic Calculus",
+    "year": 2016,
+    "publisher": "Springer"
+  },
+  "KS": {
+    "type": "book",
+    "author": ["Karatzas, I.", "Shreve, S."],
+    "title": "Brownian Motion and Stochastic Calculus",
+    "year": 1998,
+    "publisher": "Springer"
+  },
+  "RY": {
+    "type": "book",
+    "author": ["Revuz, D.", "Yor, M."],
+    "title": "Continuous Martingales and Brownian Motion",
+    "year": 1991,
+    "publisher": "Springer"
+  },
+  "IW": {
+    "type": "book",
+    "author": ["Ikeda, N.", "Watanabe, S."],
+    "title": "Stochastic Differential Equations and Diffusion Processes",
+    "year": 1989,
+    "publisher": "North-Holland Publishing Company; Kodansha"
+  },
+  "Evans": {
+    "type": "book",
+    "author": ["Evans, L. C."],
+    "title": "An Introduction to Stochastic Differential Equations",
+    "year": 2013,
+    "publisher": "American Mathematical Society"
+  },
+  "Ito": {
+    "type": "article",
+    "author": ["Itô, K."],
+    "title": "On stochastic differential equations",
+    "year": 1951,
+    "journal": "Memoirs of the American Mathematical Society"
+  },
+  "HairerPardoux": {
+    "type": "article",
+    "author": ["Hairer, M.", "Pardoux, É."],
+    "title": "A Wong–Zakai theorem for stochastic PDEs",
+    "year": 2015,
+    "journal": "Journal of the Mathematical Society of Japan"
+  },
+  "Follmer": {
+    "type": "article",
+    "author": ["Föllmer, H."],
+    "title": "Calcul d'Itô sans probabilités",
+    "year": 1981,
+    "journal": "Séminaire de Probabilités"
+  },
+  "Zambotti2018": {
+    "type": "incollection",
+    "author": ["Zambotti, L."],
+    "title": "SPDEs and Renormalisation",
+    "year": 2018,
+    "booktitle": "Stochastic Partial Differential Equations and Related Fields"
+  },
+  "vanKampen1981": {
+    "type": "article",
+    "author": ["van Kampen, N. G."],
+    "title": "Itô versus Stratonovich",
+    "year": 1981,
+    "journal": "Journal of Statistical Physics"
+  },
+  "dellacherie": {
+    "type": "article",
+    "author": ["Dellacherie, C."],
+    "title": "Un survol de la théorie de l'intégrale stochastique",
+    "year": 1980,
+    "journal": "Stochastic Processes and their Applications"
+  },
+  "Chaumont2011": {
+    "type": "article",
+    "author": ["Chaumont, L.", "Uribe Bravo, G."],
+    "title": "Markovian bridges: Weak continuity and pathwise constructions",
+    "year": 2011,
+    "journal": "The Annals of Probability"
+  },
+  "Hsu2002": {
+    "type": "book",
+    "author": ["Hsu, E."],
+    "title": "Stochastic Analysis on Manifolds",
+    "year": 2002,
+    "publisher": "American Mathematical Society"
+  },
+  "Tapia2020": {
+    "type": "article",
+    "author": ["Tapia, N.", "Zambotti, L."],
+    "title": "The geometry of the space of branched rough paths",
+    "year": 2020,
+    "journal": "Proceedings of the London Mathematical Society"
+  },
+  "Bertoin1998": {
+    "type": "book",
+    "author": ["Bertoin, J."],
+    "title": "Lévy Processes",
+    "year": 1998,
+    "publisher": "Cambridge University Press"
+  },
+  "Cartier2000": {
+    "type": "incollection",
+    "author": ["Cartier, P."],
+    "title": "Mathemagics: (A Tribute to L. Euler and R. Feynman)",
+    "year": 2000,
+    "booktitle": "Noise, Oscillators and Algebraic Randomness"
+  }
+}

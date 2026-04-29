@@ -2,6 +2,7 @@
   --font-size: 20px;
   --header-footer-bg: rgba(255, 255, 255, 0.7);
   --header-footer-border: rgba(0, 0, 0, 0.08);
+  --header-footer-height: 60px;
 }
 
 [data-theme="dark"] {
@@ -11,6 +12,20 @@
   --card: #1e293b;
   --header-footer-bg: rgba(15, 23, 42, 0.7);
   --header-footer-border: rgba(255, 255, 255, 0.08);
+}
+
+[id^="fn"],
+[id^="ref"] {
+  scroll-margin-top: var(--header-footer-height);
+}
+
+.cite-link{
+  scroll-margin-top: var(--header-footer-height);
+}
+
+/* Put this on bibliography entries */
+.references li{
+  scroll-margin-top: var(--header-footer-height);
 }
 
 #main {
@@ -58,7 +73,7 @@ footer {
   justify-content: center;  /* centers content horizontally */
   align-items: center;       /* centers vertically */
 
-  height: 60px;
+  height: var(--header-footer-height);
   background: var(--bg);
   color: var(--text);
   z-index: 1000;
@@ -75,13 +90,15 @@ header {
 
 footer {
   bottom: 0;
+  display: flex;
+  gap: 20px;
 }
 
 #face {
 float:left;
 }
 
-.footnotes {
+.footnotes ol {
   font-size: calc(var(--font-size) - 4px);
 }
 
@@ -136,8 +153,8 @@ table {
 }
 
 caption {
-  caption-side: bottom;
-  padding: calc(var(--font-size));
+  caption-side: top;
+  padding: --font-size;
   font-weight: bold;
 }
 

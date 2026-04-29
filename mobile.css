@@ -9,7 +9,7 @@
 		width: 90%;
 		margin-left: 5%;
 		margin-top:5%;
-		margin-bottom:5%;
+		margin-bottom:6%;
 		padding: 0;
 	}
 	footer:after {
@@ -22,8 +22,9 @@
 		}
 	header,
 	footer {
-		height: 5%;
+		--header-footer-height: 5%;
 	}
+	
 	mjx-container {
     font-size: 90%;
   }

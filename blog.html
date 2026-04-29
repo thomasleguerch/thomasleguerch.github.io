@@ -27,13 +27,14 @@
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
   <script src="script.js"></script>
+  <script src="footnotes.js"></script>
+  <script src="citations.js"></script>
     <title>Personal webpage of Thomas Le Guerch</title>
     <meta charset="utf-8"/>
   </head>
   <body>
     <div id="header"></div>
     <div id="main">
-
     <h2>Math blog</h2>
     <h3>Random functions and their roughness</h3>
     in progress
@@ -43,7 +44,7 @@
       <ul>
         <li>Brownian motion is critical with respect to ordinary calculus. Brownian-driven differential equations can <i>almost</i> be made sense of using Young integrals.</li>
         <li>Stochastic calculus is a vague term referring to a set of tools (integral, derivative, chain rule) fit for the study of stochastic processes.</li>
-        <li>Stochastic calculus is not an extension of ordinary calculus. Rather than relying on the regularity of functions, it relies on probabilistic properties of stochastic processes.</li>
+        <li>Stochastic calculus is not an extension of ordinary calculus. Rather than relying on the regularity of functions, it relies on the probabilistic properties of stochastic processes.</li>
         <li>Itô calculus is the stochastic calculus of semimartingales.</li>
         <li>In the narrowest sense, stochastic differential equations are equations involving an Itô integral.</li>
         <li>Stochastic differential equations may be used to model dynamical systems disturbed by noise. This is possible only when the noise is a semimartingale.</li>
@@ -113,10 +114,9 @@
 
           </center>
     </p>
-
     <h4>A pedagogical reordering of History</h4>
     <p>
-      Stochastic differential equations are often presented as a natural extension of ordinary differential equations (ODE), see for instance \cite{Evans,legall}, p. 209. The ODE
+      Stochastic differential equations are often presented as a natural extension of ordinary differential equations (ODE), see for instance {{Evans}}{{legall}}. The ODE
       \[\dot{x}_t=b(x_t)\]
       can be upgraded to the following &laquo; ODE with noise &raquo;
       \[\dot{X}_t=b(X_t)+\sigma\xi_t\,,\]
@@ -132,7 +132,7 @@
       Equation \eqref{eq:ODE_with_noise} can be loosely described as a controlled differential equation with random control.
       In the context of physical or financial modelling, the random forcing \(\xi\) stems from <i>unknown</i> degrees of freedom,
       and it is quite natural to take \(\xi\) to be a Gaussian white noise (centred Gaussian impulses occurring randomly and equally at every frequency).
-      In this context, typical realisations of \(\xi\) are generalised functions <a href="#footnote0">[0]</a>, and \eqref{eq:ODE_with_noise} involves the product of a generalised function with a non-smooth function, which is an ill-defined operation.
+      In this context, typical realisations of \(\xi\) are generalised functions <span class="footnote">Random does not mean rough but most interesting random objects are rough.</span>, and \eqref{eq:ODE_with_noise} involves the product of a generalised function with a non-smooth function, which is an ill-defined operation.
       Equations of the type
       \begin{equation}\label{eq:ODE_controlled}
       \dot x_t=b(x_t)+\sigma(x_t)\dot g_t 
@@ -167,14 +167,14 @@
       In such books, &laquo; Itô calculus &raquo; and &laquo; stochastic calculus &raquo; are used interchangeably, but Itô calculus has a very narrow scope.
     </p>
     <p>
-      We will rely on \cite{IW,KS,RY} and the seminal work \cite{Ito} <a href="#footnote1">[1]</a> to recount a more accurate history.
+      We will rely on \cite{IW,KS,RY} and the seminal work \cite{Ito} <span class="footnote">This memoir was written by Itô as an extension and as an English translation of an article written in Japanese in 1942.</span> to recount a more accurate history.
       The advent of SDEs is to be found in the theory of Markov processes rather than in the theory of ODEs.
       My point is not to criticise authors who choose the latter approach to introduce SDEs. Their aim is to motivate the introduction of a material which has far exceeded its historical purpose.
     </p>
     <h4>A more accurate history of SDEs</h4>
     <p>
     It is well known that one can associate a homogeneous Markov process with an operator called the infinitesimal generator which describes how the process moves from point to point.
-    For instance, if \(W_t\) is an \(\mathbb R^d\)-valued Brownian motion, \(X_t=x+b t+\sigma W_t\) is a Markov process with generator given by
+    For instance, if \(B_t\) is an \(\mathbb R^d\)-valued Brownian motion, \(X_t=x+b t+\sigma B_t\) is a Markov process with generator given by
 
     \begin{equation}\label{eq:generator_arithmetic_BM}
         Lf(x)=\sum_ib_i\partial_if(x)+\frac{1}{2}\sum_{i,j}a_{ij}\partial_{ij}^2f(x),\quad f\in\mathcal C^2_0\,,
@@ -187,16 +187,19 @@
     \end{equation}
 
     where the matrix \(a(x)\) is symmetric and non-negative (see \cite{RY}, p. 267). These Markov processes are called diffusions.
+    </p>
+    <h5>The <i>methodology of stochastic differential equations</i></h5>
+    <p>
     Let us suppose that there exists a Markov process \(X\) with generator \eqref{eq:generator_general}. Taking the generator at face value suggests that between times \(t\) and \(t+h\), \(X\) satisfies
     
     \begin{equation*}
-        X_{t+h}=X_t+b(X_t)h+\sigma(X_t)(W_{t+h}-W_t)+o(h)\,,
+        X_{t+h}=X_t+b(X_t)h+\sigma(X_t)(B_{t+h}-B_t)+o(h)\,,
     \end{equation*}
 
-    where \(\sigma\sigma^t=a\) and \(W_t\) is a Brownian motion. One may express the same idea in integral form
+    where \(\sigma\sigma^t=a\) and \(B_t\) is a Brownian motion. One may express the same idea in integral form
     
     \begin{equation}\label{eq:SDE}
-        X_t=x+\int_0^tb(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd W_s\,.
+        X_t=x+\int_0^tb(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd B_s\,.
     \end{equation}
 
     Notice how \eqref{eq:SDE} resembles \eqref{eq:proto_SDE_integral}, even though we obtained them in unrelated ways.
@@ -205,18 +208,18 @@
     <p>
     This is how SDEs first appeared historically. People noticed that some Markov processes ought to satisfy <i>stochastic differential equations</i>.
     If one came up with a way of defining the (analytically challenging) second integral appearing in \eqref{eq:SDE}, then one could construct \(X\) as the solution to \eqref{eq:SDE}.
-    According to \cite{IW,KS}, this approach to diffusions was proposed by P. Lévy and is dubbed in \cite{KS} as the <i>methodology of stochastic differential equations</i> <a href="#footnote2">[2]</a>.
+    According to \cite{IW,KS}, this approach to diffusions was proposed by P. Lévy and is dubbed in \cite{KS} as the <i>methodology of stochastic differential equations</i> <span class="footnote">To be compared with the method of parabolic equations due to Kolmogorov, which relies on the parabolic partial differential equation \(\partial_tp=Lp\) to define transition probabilities. The Kolmogorov extension theorem then serves to obtain the existence of a corresponding Markov process, and lastly, the Kolmogorov continuity theorem allows to obtain a continuous modification.</span>.
     The merit of defining the <i>stochastic integral</i> with respect to \(W\) rests on Itô and is presented in \cite{Ito}.
     </p>
-    <h5>Itô's breakthrough &mdash; Itô calculus</h5>
+    <h5>Itô's stochastic integral</h5>
     <p>
-      In modern parlance, Itô noticed that Riemann-type sums like
+      In modern parlance<span class="footnote">Itô did not mention martingales or adaptedness. He rather used that for every $s$, the family $\{H_r\,,\ 0\le r\le s\}$ is independent from the family $\{B_u-B_s\,,\ s\le u\le t\}$</span>, Itô noticed that Riemann-type sums like
       \[\sum_iH_{t_i}(B_{t_{i+1}}-B_{t_i})\]
       converge in $L^2(\mathbb P)$ along sequences of partitions with vanishing mesh, provided $H$ is adapted to the filtration of $B$.
       This relies on the martingale property of $B$ and on the so-called Itô isometry:
       <p>
         <b>Theorem</b> (Itô isometry) <i>
-          For every process $H$ that reads
+          For every simple predictable process $H$ that reads
       \begin{equation}\label{eq:simple_process}
       H_t=\sum_{i}H_i\mathbbm{1}_{]t_i,t_{i+1}]}(t)\,,
       \end{equation}
@@ -229,14 +232,48 @@
         </i>
       </p>
       The Itô isometry \eqref{eq:ito_isometry} essentially means that a convenient Itô integral $(H\cdot B)_t$ exists for every adapted process $H$ such that $\int_0^t\mathbb E[H_s^2]\,\dd s&lt;\infty$.
-      This is done by approximating $H$ by processes of the type \eqref{eq:simple_process} and taking limit in the right spaces.
+      This is done by approximating $H$ by processes of the type \eqref{eq:simple_process} and taking limit in the appropriate spaces.
       The limit is usually denoted
-      \[\int_0^tH_s\,\dd B_s\,,\ \text{or}\ (H\cdot X)_t\,.\]
+      \[\int_0^tH_s\,\dd B_s\,,\ \text{or}\ (H\cdot B)_t\,,\]
+      and is called the Itô integral.
       The second notation is more pedagogical. It emphasises that the integral is not a usual integral.
-      The single most important mathematical fact behind the Itô integral is the Itô isometry.
+      The Itô isometry is the single most important mathematical fact behind the Itô integral.
+    </p>
+    <h5>Back to diffusion processes &mdash; Itô's breakthrough: Itô calculus</h5>
+    <p>
+      We shall keep in mind that Itô's programme was to give substance to the so-called methodology of stochastic differential equations.
+      Having defined a notion of integral with respect to $B$, and interpreting the problematic integral in \eqref{eq:SDE} as an Itô integral, there remained to prove that
+      <ol>
+        <li>there exists a solution $X$ to \eqref{eq:SDE};</li>
+        <li>$X$ has the Markov property;</li>
+        <li>$X$ has $b$ (resp. $\sigma$) as its drift (resp. diffusion) coefficient.</li>
+      </ol>
     </p>
     <p>
-      What makes Itô calculus a <i>calculus</i> is the Itô formula and the Itô isometry.
+      Assuming that $b$ and $\sigma$ are Lipschitz continuous and have at most linear growth (similar conditions appear in the Picard-Lindelöf theorem), a unique solution $X$ can be proved to exist
+      by a Banach fixed point argument.
+    </p>
+    <p>Itô then derived a chain rule for his integral. Generically, the solution $X$ to \eqref{eq:SDE} will be a process of the kind
+      \begin{equation}\label{eq:ito_process}
+        X_t=x+\int_0^tb_s\,\dd s+\int_0^t\sigma_s\,\dd B_s\,.
+      \end{equation}
+    For such processes, called Itô processes, the chain rule reads for every $f\in\mathcal C^2$,
+      \begin{equation}\label{eq:ito_formula}
+        f(X_t)=f(x)+\int_0^tf'(X_s)\sigma_s\,\dd B_s+\int_0^t\underbrace{\left[\vphantom{\frac12}\right.f'(X_s)b_s+\overbrace{\frac12f''(X_s)\sigma^2_s}^{\text{Itô corr. term}}\left.\vphantom{\frac12}\right]}_{:=L_sf(X_s)}\,\dd s\\
+      \end{equation}
+    Notice the appearance of a corrective term. Taking expectation in \eqref{eq:ito_formula} yields
+    \begin{equation*}
+      \mathbb E[f(X_t)]=\mathbb E[f(X_s)]+\int_s^t\mathbb E[L_uf(X_u)]\,\dd u\,,
+    \end{equation*}
+    or
+    \begin{equation*}
+    P_{s,t}f(x)=f(x)+\int_s^tP_{s,u}L_uf(x)\,\dd u\,.
+    \end{equation*}
+    Differentiating the latter equation with respect to $t$ yields the Kolmogorov forward equation
+    $$
+      \partial_tP_{s,t}f(x)=P_{s,t}L_tf(x)\,.
+    $$
+    This implies that $X$ is a Markov process with desired generator. In particular, it has the desired drift $b$ and diffusion coefficient $\sigma$.
     </p>
     <h4>Analytical trouble, Young integrals and the \(p\)-variation</h4>
     This section is about attempts to make sense of integrals with respect to $B$ relying on real analysis.
@@ -258,7 +295,7 @@
         Let us introduce $p$-variation, which is of particular interest when it comes to giving criteria for the convergence of Riemann sums. <br>
         <b>Definition</b> <i>We define the \(p\)-variation on the interval \(I\subset[0,\infty)\) of any function \(f:[0,\infty)\rightarrow\mathbb R\) as the quantity
           \begin{equation*}
-              \|f\|_{p-\text{var}}^I:=\sup_{D(I)}\left(\sum_{k}(f(t_{k+1})-f(t_k))^p\right)^{1/p}\,,
+              \|f\|_{p-\text{var}}^I:=\sup_{D(I)}\left(\sum_{k}\left(f(t_{k+1})-f(t_k)\right)^p\right)^{1/p}\,,
           \end{equation*}
         where the supremum runs over all subdivisions of \(I\).</i><br>
       </p>
@@ -331,14 +368,14 @@
       \[X_t=x+\int_0^tb(X_s)\,\dd s+\frac12\int_0^t\sigma'(X_s)\sigma(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd B_s\,.\]
       Notice the appearance of an extra term.
     </p>
-    <div class="citations">
-    <h5>Citations</h5>
-  </div>
-  <div class="footnotes">
-    <div id="footnote0">[0] Random does not mean rough but most interesting random objects are rough.</div>
-    <div id="footnote1">[1] This memoir was written by Itô as an extension and as an English translation of an article written in Japanese in 1942.</div>
-    <div id="footnote2">[2] To be compared with the method of parabolic equations due to Kolmogorov, which relies on the parabolic partial differential equation \(\partial_tp=Lp\) to define transition probabilities. The Kolmogorov extension theorem then serves to obtain the existence of a corresponding Markov process, and lastly, the Kolmogorov continuity theorem allows to obtain a continuous modification.</div>
-  </div>
+    <section class="references">
+    <h5>References</h5>
+    <ol id="references"></ol>
+    </section>
+    <section class="footnotes">
+    <h5>Footnotes</h5>
+    <ol id="footnote-list"></ol>
+    </section>
     </div>
     <div id="footer"></div>
   </body>
