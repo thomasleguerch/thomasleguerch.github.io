@@ -145,7 +145,7 @@ function buildReferenceSection(refs, order, numbers) {
   if (!section) return;
 
   section.innerHTML = `
-    <h2>References</h2>
+    <h5>References</h5>
     <ol class="ref-list"></ol>
   `;
 
