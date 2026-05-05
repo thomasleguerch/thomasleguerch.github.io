@@ -48,10 +48,10 @@
       <ul>
         <li>Brownian motion is critical with respect to ordinary calculus. Brownian-driven differential equations can <i>almost</i> be made sense of using Young integrals.</li>
         <li>Stochastic calculus is a vague term referring to a set of tools (integral, derivative, chain rule) fit for the study of stochastic processes.</li>
-        <li>Stochastic calculus is not an extension of ordinary calculus. Rather than relying on the regularity of functions, it relies on the probabilistic properties of stochastic processes.</li>
-        <li>Itô calculus is the stochastic calculus of semimartingales.</li>
+        <li>Stochastic calculus is not quite an <i>extension</i> of ordinary calculus. Rather than relying on the regularity of functions, it relies mostly on the probabilistic properties of stochastic processes.</li>
+        <li>Itô calculus is the classical stochastic calculus associated with semimartingales.</li>
         <li>In the narrowest sense, stochastic differential equations are equations involving an Itô integral.</li>
-        <li>Stochastic differential equations may be used to model dynamical systems disturbed by noise. This is possible only when the noise is a semimartingale.</li>
+        <li>Stochastic differential equations based on Itô integrals may be used to model dynamical systems disturbed by noise. This is possible only when the noise is a semimartingale.</li>
         </ul>
     </p>
     <p>
@@ -142,7 +142,7 @@
       \dot x_t=b(x_t)+\sigma(x_t)\dot g_t 
       \end{equation}
       classically make sense for smooth enough controls ($g$ should be Lipschitz or BV), but white noise is not smooth enough.
-      This means that it is impossible to make sense of \eqref{eq:ODE_with_noise} for typical realisations of Gaussian white noise.
+      This means that, for typical realisations of Gaussian white noise, \eqref{eq:ODE_with_noise} cannot be interpreted in a classical pathwise sense.
     </p>
     <p>
       Notice that, even though typical realisations of \(\xi\) are generalised functions, they are the derivative of a true function. In other words, there exists a random process \(B\) (whose typical realisations are true functions)
@@ -154,26 +154,31 @@
       \begin{equation}\label{eq:proto_SDE_integral}
           x_t=x_0+\int_0^tb(x_s)\,\dd s+\int_0^t\sigma(x_s)\,\dd g_s\,.
       \end{equation}
-      Having in mind functions $g$ that are typical realisations of $B$, equation \eqref{eq:proto_SDE_integral} is as problematic as \eqref{eq:ODE_with_noise} from an analytical point of view.
+      Having in mind functions $g$ that are typical realisations of $B$, equation \eqref{eq:proto_SDE_integral} is equally ill-posed as \eqref{eq:ODE_with_noise} from an analytical point of view.
       This time, the issue is not about multiplying a distribution with a non-smooth function, it is about making sense of the integral w.r.t. to $g$.
       One could expect to rely on Stieltjes integrals,
       but one would need $g$ to be Lipschitz or BV. This analytical problem is akin to multiplying a distribution with a non-smooth function.
     </p>
     <p>
-      The authors of modern stochastic analysis textbooks usually remark &mdash; after Lévy and Itô &mdash; that typical realisations of $B$ are not Lipschitz or BV, and usually pull <i>Itô integrals</i> out of the hat.
-      At this point, they usually keep quiet about the fact that Itô integrals are only really useful when $B$ is a Brownian motion (equivalently $\xi$ is Gaussian white noise).
+      The authors of modern stochastic analysis textbooks usually remark &mdash; after Lévy and Itô &mdash; that typical realisations of $B$ are not Lipschitz or BV, and that tailor-made <i>Itô integrals</i> may be constructed and used.
     </p>
-    <h5>How is this a reordering of History?</h5>
+    <h5>How is this a slight reordering of History?</h5>
     <p>
-      In the context of physical or financial modelling, many other types of random inputs would make perfect sense,
-      but Itô integrals are of no help.
-      Countless books offer an introduction to Itô calculus without explicitly referring to this significant limitation.
-      In such books, &laquo; Itô calculus &raquo; and &laquo; stochastic calculus &raquo; are used interchangeably, but Itô calculus has a very narrow scope.
+    Stochastic differential equations are often introduced in the context of Itô calculus, which provides a natural framework for integration with respect to semimartingales. In this setting, the Itô integral and the associated calculus form a
+    coherent toolkit for studying stochastic dynamics driven by Brownian motion, and more generally, semimartingales.
+    </p>
+    <p>In many applications, especially in physics and finance, one is led to consider stochastic perturbations that go beyond this class. While semimartingales cover a large and highly relevant family of noises, they do not exhaust all models of interest.
+      In particular, processes with long-range dependence or rougher structure fall outside the scope of classical Itô theory, and require alternative notions of integration.
+    </p>
+    <p>As a result, &laquo;stochastic calculus&raquo; is often used in a broader sense than Itô calculus alone, even though the latter provides the central and most widely used framework.
+    </p>
+    <p>
+      Also, it could be argued that SDEs find their roots in the Langevin equation when the noise is multiplicative (multiplied by a function of the unkown, as in \eqref{eq:ODE_with_noise}).
+      I am writing this post from a maths perspective, so I may be missing some background, but I assume that Itô was the first one to propose a consistent interpretation of \eqref{eq:ODE_with_noise}.
     </p>
     <p>
       We will rely on {{IW}}{{KS}}{{RY}} and the seminal work {{Ito}} <span class="footnote">This memoir was written by Itô as an extension and as an English translation of an article written in Japanese in 1942.</span> to recount a more accurate history.
       The advent of SDEs is to be found in the theory of Markov processes rather than in the theory of ODEs.
-      My point is not to criticise authors who choose the latter approach to introduce SDEs. Their aim is to motivate the introduction of a material which has far exceeded its historical purpose.
     </p>
     <h4>A more accurate history of SDEs</h4>
     <p>
@@ -207,7 +212,7 @@
     \end{equation}
 
     Notice how \eqref{eq:SDE} resembles \eqref{eq:proto_SDE_integral}, even though we obtained them in unrelated ways.
-    The analytical problem we already mentioned still persists, but this time $W$ is naturally a Brownian motion.
+    The analytical problem we already mentioned still persists, but this time $B$ is naturally a Brownian motion.
     </p>
     <p>
     This is how SDEs first appeared historically. People noticed that some Markov processes ought to satisfy <i>stochastic differential equations</i>.
@@ -241,15 +246,18 @@
       \[\int_0^tH_s\,\dd B_s\,,\ \text{or}\ (H\cdot B)_t\,,\]
       and is called the Itô integral.
       The second notation is more pedagogical. It emphasises that the integral is not a usual integral.
-      At this point, the notation $\int_0^tH_s\,\dd B_s$ is mainly mnemonic: the differential $\dd B$
-      has no intrinsic meaning yet, and the expression does not behave like classical calculus. It is really Itô’s formula that later justifies this suggestive notation.
-    </p>
+      
     <p>
-      <b>Remark</b> <i>At first, the notation $\int_0^tH_s\,\dd B_s$ is slightly misleading, in the same way that writing $\sum X_n$ for a series which only converges in $L^2(\mathbb P)$ (and not p.s.) can be misleading.
-        Contrary to $\sum X_n$, the convergence in $L^2(\mathbb P)$ is hardcoded in the notation $\int_0^tH_s\,\dd B_s$, because it is known not to converge in other ways.
-      </i>
+      <b>Remark.</b> <i>At first, the notation
+      \(\int_0^t H_s\,\mathrm dB_s\)
+      is somewhat suggestive: the differential \(\mathrm dB\) has no intrinsic meaning yet,
+      and no calculus rules have been established. In this sense, it is reminiscent of writing
+      \(\sum X_n\) for a series that only converges in \(L^2(\mathbb P)\),
+      where the notation may suggest a stronger mode of convergence than is actually available.
+      The difference, however, is that the Itô integral is defined via an \(L^2\)-limit,
+      so the mode of convergence is built into its construction.</i>
     </p>
-    <p>The Itô isometry is the single most important mathematical fact behind the Itô integral.</p>
+    <p>The Itô isometry is one of the most important mathematical facts behind the Itô integral.</p>
     <h5>Back to diffusion processes &mdash; Itô's breakthrough: Itô calculus</h5>
     <p>
       We shall keep in mind that Itô's programme was to give substance to the so-called methodology of stochastic differential equations.
@@ -363,7 +371,7 @@
         Let us introduce $p$-variation, which is of particular interest when it comes to giving criteria for the convergence of Riemann sums. <br>
         <b>Definition</b> <i>We define the \(p\)-variation on the interval \(I\subset[0,\infty)\) of any function \(f:[0,\infty)\rightarrow\mathbb R\) as the quantity
           \begin{equation*}
-              \|f\|_{p-\text{var}}^I:=\sup_{D(I)}\left(\sum_{k}\left(f(t_{k+1})-f(t_k)\right)^p\right)^{1/p}\,,
+              \|f\|_{p-\text{var}}^I:=\sup_{D(I)}\left(\sum_{k}\left|f(t_{k+1})-f(t_k)\right|^p\right)^{1/p}\,,
           \end{equation*}
         where the supremum runs over all subdivisions of \(I\).</i><br>
       </p>
@@ -401,7 +409,7 @@
         as long as $g$ has finite $p$-variation with $p&lt2$.</i>
     </p>
     <p>
-        One might expect that $p$-variation is not the final answer, as there exist other ways to measure the regularity of functions, but here comes the final nail in the coffin.
+        One might expect that $p$-variation is not the final answer, as there exist other ways to measure the regularity of functions, but the next theorem indicates that this approach is insufficient on its own. 
     </p>
     <p>
         <b>Theorem</b> (Lyons 91) <i>There exists no separable Banach space $\mathcal B\subset\mathcal C([0,1])$ with the following properties
@@ -415,7 +423,6 @@
       <b>Remark</b><i>
         In particular, there exists no Banach topology on $\mathcal C([0,1])$ strong enough to keep the Sieltjes integral
         continuous in its arguments and weak enough to allow smooth paths to converge to Brownian paths.
-        Lyons' theorem provides a quantitative answer to the claim that stochastic integration is analytically ill-posed by nature.
     </i>
     </p>
     <h4>On a theme of Wong, Zakai and Stratonovich</h4>
@@ -430,7 +437,7 @@
     </p>
     <p>
       It can be proved that $X^\varepsilon$ converges to a process $X$ in $\mathcal C([0,1])$ in probability as $\varepsilon\downarrow0$.
-      Of course, the limiting process $X$ cannot satisfy a similar equation with a Stieltjes, or even a Young integral, as we already understood.
+      The limiting process $X$ does not satisfy a similar equation with a Stieltjes, or even a Young integral, as we already understood.
       However, $X$ satisfies a weaker equation where the integral is an Itô integral.
       Quite surprisingly, $X$ satisfies
       \[X_t=x+\int_0^tb(X_s)\,\dd s+\frac12\int_0^t\sigma'(X_s)\sigma(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd B_s\,.\]
