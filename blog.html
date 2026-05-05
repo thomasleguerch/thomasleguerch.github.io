@@ -36,8 +36,12 @@
     <div id="header"></div>
     <div id="main">
     <h2>Math blog</h2>
+    <section>
     <h3>Random functions and their roughness</h3>
-    in progress
+    <h4>Brownian motion, fractional Brownian motion</h4>
+    <h4>Gaussian White noise</h4>
+    </section>
+    <section>
     <h3>Stochastic Integration and Stochastic Equations</h3>
     <p>
       I wish to emphasize a few points which I feel are little known
@@ -232,13 +236,20 @@
         </i>
       </p>
       The Itô isometry \eqref{eq:ito_isometry} essentially means that a convenient Itô integral $(H\cdot B)_t$ exists for every adapted process $H$ such that $\int_0^t\mathbb E[H_s^2]\,\dd s&lt;\infty$.
-      This is done by approximating $H$ by processes of the type \eqref{eq:simple_process} and taking limit in the appropriate spaces.
+      This is done by approximating $H$ by processes of the type \eqref{eq:simple_process} and taking limits in the appropriate spaces.
       The limit is usually denoted
       \[\int_0^tH_s\,\dd B_s\,,\ \text{or}\ (H\cdot B)_t\,,\]
       and is called the Itô integral.
       The second notation is more pedagogical. It emphasises that the integral is not a usual integral.
-      The Itô isometry is the single most important mathematical fact behind the Itô integral.
+      At this point, the notation $\int_0^tH_s\,\dd B_s$ is mainly mnemonic: the differential $\dd B$
+      has no intrinsic meaning yet, and the expression does not behave like classical calculus. It is really Itô’s formula that later justifies this suggestive notation.
     </p>
+    <p>
+      <b>Remark</b> <i>At first, the notation $\int_0^tH_s\,\dd B_s$ is slightly misleading, in the same way that writing $\sum X_n$ for a series which only converges in $L^2(\mathbb P)$ (and not p.s.) can be misleading.
+        Contrary to $\sum X_n$, the convergence in $L^2(\mathbb P)$ is hardcoded in the notation $\int_0^tH_s\,\dd B_s$, because it is known not to converge in other ways.
+      </i>
+    </p>
+    <p>The Itô isometry is the single most important mathematical fact behind the Itô integral.</p>
     <h5>Back to diffusion processes &mdash; Itô's breakthrough: Itô calculus</h5>
     <p>
       We shall keep in mind that Itô's programme was to give substance to the so-called methodology of stochastic differential equations.
@@ -275,7 +286,64 @@
     $$
     This implies that $X$ is a Markov process with desired generator. In particular, it has the desired drift $b$ and diffusion coefficient $\sigma$.
     </p>
-    <h4>Analytical trouble, Young integrals and the \(p\)-variation</h4>
+    </section>
+    <section>
+    <h3>Pathwise aspects of stochastic calculus</h3>
+    <p>
+        <center>
+      <table>
+  <caption>
+    Partial chronology of pathwise stochastic calculus
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">Year</th>
+      <th scope="col">Author</th>
+      <th scope="col">Discovery</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1936-37</th>
+      <td>L.C. Young & V. Kondurar</td>
+      <td>Extended Stieltjes integrals to functions of finite $p$-variation, or to Hölder-continuous functions.</td>
+    </tr>
+    <tr>
+      <th scope="row">1954</th>
+      <td>K.-T. Chen</td>
+      <td>Hopf-algebraic aspects of iterated integrals of smooth paths.</td>
+    </tr>
+    <tr>
+      <th scope="row">1981</th>
+      <td>H. Föllmer</td>
+      <td>Proved a deterministic Itô-type formula on purely analytical grounds.</td>
+    </tr>
+    <tr>
+      <th scope="row">1989-93</th>
+      <td>F. Russo & P. Vallois</td>
+      <td>Introduced stochastic calculus via regularisation.</td>
+    </tr>
+    <tr>
+      <th scope="row">1998</th>
+      <td>T. Lyons</td>
+      <td>Introduced rough paths theory.</td>
+    </tr>
+    <tr>
+      <th scope="row">2003</th>
+      <td>M. Gubinelli</td>
+      <td>Introduced controlled rough paths.</td>
+    </tr>
+    <tr>
+      <th scope="row">2014</th>
+      <td>M. Hairer</td>
+      <td>Introduced regularity structures, the first generic approach to subcritical singular SPDEs.</td>
+    </tr>
+  </tbody>
+</table>
+
+</center>
+    </p>
+  <h4>Analytical trouble, Young integrals and the \(p\)-variation</h4>
     This section is about attempts to make sense of integrals with respect to $B$ relying on real analysis.
     That is to say, we are looking for an integration theory which extends Stieltjes integration while being general enough to allow
     integration with respect to typical realisations of Brownian motion.
@@ -368,6 +436,7 @@
       \[X_t=x+\int_0^tb(X_s)\,\dd s+\frac12\int_0^t\sigma'(X_s)\sigma(X_s)\,\dd s+\int_0^t\sigma(X_s)\,\dd B_s\,.\]
       Notice the appearance of an extra term.
     </p>
+    </section>
     <section class="references">
     </section>
     <section class="footnotes">

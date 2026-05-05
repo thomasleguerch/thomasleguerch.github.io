@@ -146,6 +146,7 @@ mjx-container a[href*="mjx-eqn"] {
 }
 
 table {
+  width: 85%;
   border-collapse: collapse;
   border: 2px solid rgb(140 140 140);
   font-size: calc(var(--font-size) - 4px);
