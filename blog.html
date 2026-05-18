@@ -81,12 +81,12 @@
     <tr>
       <th scope="row">1923-24</th>
       <td>N. Wiener</td>
-      <td>Gave the first rigorous construction of Brownian motion as a random series.</td>
+      <td>Gave the first rigorous construction of Brownian motion as a probability measure on path space.</td>
     </tr>
     <tr>
       <th scope="row">1930s</th>
       <td>P. Lévy</td>
-      <td>Brownian paths have infinite variation over compacts.</td>
+      <td>Developed the fine analysis of Brownian paths, including quadratic variation.</td>
     </tr>
     <tr>
       <th scope="row">1933</th>
@@ -99,7 +99,19 @@
       <td>Introduced integrals with respect to Brownian motion for deterministic functions.</td>
     </tr>
     <tr>
-      <th scope="row">1940s</th>
+      <th scope="row" >Late 1930s</th>
+      <td>P. Lévy</td>
+      <td>Emphasised the infinitesimal Gaussian increment structure of diffusion processes, foreshadowing stochastic differential equations.</td>
+    </tr>
+    <tr>
+      <th scope="row">1942</th>
+      <td>J.-L. Doob</td>
+      <td>Showed that the Ornstein-Uhlenbeck process satisfies a stochastic equation.</td>
+    </tr>
+    <tr>
+    </tr>
+    <tr style="border-top: 4px double black;">
+      <th scope="row">1944</th>
       <td>K. Itô</td>
       <td>Introduced the Itô integral and developped Itô calculus.</td>
     </tr>
@@ -118,6 +130,7 @@
 
           </center>
     </p>
+    <p>The double line in the table separates the prehistory of stochastic calculus from its history. Itô introduced the framework of <i>stochastic calculus</i>.</p>
     <h4>A pedagogical reordering of History</h4>
     <p>
       Stochastic differential equations are often presented as a natural extension of ordinary differential equations (ODE), see for instance {{Evans}}{{legall}}. The ODE
@@ -222,7 +235,7 @@
     </p>
     <h5>Itô's stochastic integral</h5>
     <p>
-      In modern parlance<span class="footnote">Itô did not mention martingales or adaptedness. He rather used that for every $s$, the family $\{H_r\,,\ 0\le r\le s\}$ is independent from the family $\{B_u-B_s\,,\ s\le u\le t\}$</span>, Itô noticed that Riemann-type sums like
+      Itô noticed<span class="footnote">Itô did not mention martingales or adaptedness. He rather used that for every $s$, the family $\{H_r\,,\ 0\le r\le s\}$ is independent from the family $\{B_u-B_s\,,\ s\le u\le t\}$</span> that Riemann-type sums like
       \[\sum_iH_{t_i}(B_{t_{i+1}}-B_{t_i})\]
       converge in $L^2(\mathbb P)$ along sequences of partitions with vanishing mesh, provided $H$ is adapted to the filtration of $B$.
       This relies on the martingale property of $B$ and on the so-called Itô isometry:
